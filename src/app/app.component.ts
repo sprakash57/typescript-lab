@@ -12,6 +12,8 @@ export class AppComponent {
   public topics=["Angular","MongoDB","Express","Vue"]; 
   userModel = new User("Sunny","sunnypr12@outlook.com",7044080165,"default","morning",false);
   hasError = false;
+  submitted = false;
+  errorMsg = "";
 
   validate(value){
     if(value === "default"){
@@ -22,8 +24,9 @@ export class AppComponent {
   }
   constructor(private enrollService:EnrollmentService){}
   onSubmit(){
+    this.submitted = true;
     this.enrollService.enroll(this.userModel)
                       .subscribe(data => console.log("Success!!",data),
-                                 error => console.log("Error!",error))
+                                 error => this.errorMsg = error.statusText);
   }
 }
