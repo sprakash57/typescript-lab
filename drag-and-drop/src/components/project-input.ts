@@ -1,8 +1,8 @@
-enum Status { Active, Finished };
+import { Component } from './base-component.js'
+import { Autobind } from '../decorators/autobind.js';
+import { projectState } from '../state/project-state.js';
 
-
-
-class ProjectInput extends Component<HTMLDivElement, HTMLFormElement>{
+export class ProjectInput extends Component<HTMLDivElement, HTMLFormElement>{
     inputTitle: HTMLInputElement;
     inputDesc: HTMLTextAreaElement;
     inputPeople: HTMLInputElement;
@@ -46,7 +46,3 @@ class ProjectInput extends Component<HTMLDivElement, HTMLFormElement>{
         }
     }
 }
-
-const projInput = new ProjectInput();
-const activeProject = new ProjectList('active');
-const finishedProject = new ProjectList('finished');
