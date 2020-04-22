@@ -1,9 +1,12 @@
-import { DragTarget } from "../models/drag-drop.js";
-import { Component } from './base-component.js'
-import { projectState } from "../state/project-state.js";
+import { DragTarget } from "../models/drag-drop";
+import { Component } from './base-component'
+import { projectState } from "../state/project-state";
+import * as P from "../models/project";
+import { Autobind } from "../decorators/autobind";
+import { ProjectItem } from "./project-item";
 
-class ProjectList extends Component<HTMLDivElement, HTMLElement> implements DragTarget {
-    assignedProjects: Project[] = [];
+export class ProjectList extends Component<HTMLDivElement, HTMLElement> implements DragTarget {
+    assignedProjects: P.Project[] = [];
 
     constructor(private type: 'active' | 'finished') {
         super('project-list', 'app', 'beforeend', `${type}-projects`)
@@ -20,10 +23,10 @@ class ProjectList extends Component<HTMLDivElement, HTMLElement> implements Drag
     @Autobind
     dropHandler(event: DragEvent): void {
         const projId = event.dataTransfer!.getData('text/plain');
-        projectState.moveProject(projId, this.type === 'active' ? Status.Active : Status.Finished)
+        projectState.moveProject(projId, this.type === 'active' ? P.Status.Active : P.Status.Finished)
     }
-    @Autobing
-    dragLeaveHandler(event: DragEvent): void {
+    @Autobind
+    dragLeaveHandler(_: DragEvent): void {
         this.element.querySelector('ul')!.classList.remove('droppable')
     }
 
@@ -39,10 +42,10 @@ class ProjectList extends Component<HTMLDivElement, HTMLElement> implements Drag
         this.element.addEventListener('dragover', this.dragOverHandler);
         this.element.addEventListener('dragleave', this.dragLeaveHandler);
         this.element.addEventListener('drop', this.dropHandler);
-        projectState.addListeners((projects: Project[]) => {
+        projectState.addListeners((projects: P.Project[]) => {
             this.assignedProjects = projects.filter(prj => {
-                if (this.type === 'active') return prj.status === Status.Active;
-                return prj.status === Status.Finished;
+                if (this.type === 'active') return prj.status === P.Status.Active;
+                return prj.status === P.Status.Finished;
             });
             this.renderProject();
         });

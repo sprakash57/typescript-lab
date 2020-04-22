@@ -1,7 +1,7 @@
-import { Draggable } from "../models/drag-drop.js";
-import { Component } from './base-component.js'
-import { Project } from "../models/project.js";
-import { Autobind } from "../decorators/autobind.js";
+import { Draggable } from "../models/drag-drop";
+import { Component } from './base-component'
+import { Project } from "../models/project";
+import { Autobind } from "../decorators/autobind";
 
 export class ProjectItem extends Component<HTMLUListElement, HTMLLIElement> implements Draggable {
     private project: Project;
@@ -21,7 +21,7 @@ export class ProjectItem extends Component<HTMLUListElement, HTMLLIElement> impl
         event.dataTransfer!.effectAllowed = 'move';
     }
 
-    dragStopHandler(event: DragEvent): void { }
+    dragStopHandler(_: DragEvent): void { }
 
     configure() {
         this.element.addEventListener('dragstart', this.dragStartHandler)

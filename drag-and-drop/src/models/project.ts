@@ -1,3 +1,5 @@
+export enum Status { Active, Finished };
+
 export class Project {
     constructor(
         public id: string,
