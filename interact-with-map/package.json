@@ -1,7 +1,7 @@
 {
-  "name": "understanding-typescript",
+  "name": "interact-with-map",
   "version": "1.0.0",
-  "description": "Understanding TypeScript Course Setup",
+  "description": "Implementing goolge maps in typescript",
   "main": "app.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
@@ -11,7 +11,7 @@
     "typescript",
     "course"
   ],
-  "author": "Maximilian Schwarzmüller",
+  "author": "sunny prakash",
   "license": "ISC",
   "devDependencies": {
     "@types/googlemaps": "^3.39.3",
